@@ -21,14 +21,18 @@ var parseDate = function(date) {
 	} else if(date.match(/^\d{10}$/) == null) {
 		// if a natural date is passed rather than a unix timestamp
 
-			// parse the month from the date string				   
+		// parse the month from the date string				   
 		for(var i in months) {
 			if(date.search(months[i].toLowerCase()) > -1) {
 				var month = full_months[i];
 			};
 		};
 
-		var naturalDate = month + " day," + " year";
+		// Create a decent "natural language" date from the given string
+		var day  = date.match(/\d+/g)[0];
+		var year = date.match(/\d+/g)[1];
+
+		var naturalDate = month + " " + day +", " + year;
 		var unixDate = "none";
 
 	} else {
