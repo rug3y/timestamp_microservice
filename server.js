@@ -17,20 +17,30 @@ var parseDate = function(date) {
 	if(date.match(/^\d{10}$/)) {
 		var unixDate = date;
 		var naturalDate = new Date(unixDate * 1000).toDateString();
-		var response = {
-			"natural": naturalDate,
-			"unix": unixDate
+		
+	} else if(date.match(/^\d{10}$/) == null) {
+		// if a natural date is passed rather than a unix timestamp
+
+			// parse the month from the date string				   
+		for(var i in months) {
+			if(date.search(months[i].toLowerCase()) > -1) {
+				var month = full_months[i];
+			};
 		};
-	}
 
+		var naturalDate = month + " day," + " year";
+		var unixDate = "none";
 
+	} else {
+		var unixDate = null;
+		var naturalDate = null;
+	};
 
-	// parse the month from the date string				   
-	for(var i in months) {
-		if(date.search(months[i].toLowerCase()) > -1) {
-			var month = full_months[i];
+	var response = {
+		"natural": naturalDate,
+		"unix": unixDate
 		}
-	}
+
 	return (response);
 };
 
