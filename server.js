@@ -10,14 +10,25 @@ var app        = express();
 
 // Function to parse date. Use regex to detect groupings of numbers/ letters in date string?
 var parseDate = function(date) {
-	return date;
+	var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+	var full_months = ['January','February','March','April','May','June',
+					   'July','August','September','October','November','December'];
+					   
+	for(var i in months) {
+		if(date.search(months[i].toLowerCase()) > -1) {
+			var month = full_months[i];
+		}
+	}
+	return month;
 };
 
 // string passed at '/' is saved to date variable and returned.
 app.get('/:date', function(req, res) {
 
-	var date = req.params.date;
-	res.send('date: ' + date);
+	var date = req.params.date.toLowerCase();
+	res.send(parseDate(date));
 });
 
-app.listen(8080, function(con));
+app.listen(8080, function() {
+	console.log("listening at port 8080")
+});
