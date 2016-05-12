@@ -1,14 +1,7 @@
 var express    = require('express');
 var app        = express();
 
-// ToDo:
-// 1. After receiving date string, parse date string.
-// 2. Determine if date string contains 'natural language' date or Unix date.
-// 3. If a valid date is passed in 'natural' or Unix format, translate it to the other format.
-// 4. Make the date pretty and readable in both formats.
-// 5. Return the date in both formats.
-
-// Function to parse date. Use regex to detect groupings of numbers/ letters in date string?
+var port = process.env.PORT || 8080;
 var parseDate = function(date) {
 	var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 	var full_months = ['January','February','March','April','May','June',
@@ -57,6 +50,6 @@ app.get('/:date', function(req, res) {
 	res.send(parseDate(date));
 });
 
-app.listen(8080, function() {
-	console.log("listening at port 8080")
+app.listen(port, function() {
+	console.log("listening at port " + port);
 });
