@@ -32,7 +32,9 @@ var parseDate = function(date) {
 		var day  = date.match(/\d+/g)[0];
 		var year = date.match(/\d+/g)[1];
 
-		var naturalDate = month + " " + day +", " + year;
+		// var naturalDate = month + " " + day +", " + year;
+		var dateString = month + " " + day + " " + year;
+		var naturalDate = new Date(dateString).toDateString();
 		var unixDate = Math.round(new Date(naturalDate).getTime() / 1000).toString();
 
 	} else {
