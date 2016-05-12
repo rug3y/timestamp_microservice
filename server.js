@@ -13,19 +13,31 @@ var parseDate = function(date) {
 	var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 	var full_months = ['January','February','March','April','May','June',
 					   'July','August','September','October','November','December'];
-					   
+
+	if(date.match(/^\d{10}$/)) {
+		var unixDate = date;
+		var naturalDate = new Date(unixDate * 1000).toDateString();
+		var response = {
+			"natural": naturalDate,
+			"unix": unixDate
+		};
+	}
+
+
+
+	// parse the month from the date string				   
 	for(var i in months) {
 		if(date.search(months[i].toLowerCase()) > -1) {
 			var month = full_months[i];
 		}
 	}
-	return month;
+	return (response);
 };
 
 // string passed at '/' is saved to date variable and returned.
 app.get('/:date', function(req, res) {
 
-	var date = req.params.date.toLowerCase();
+	var date = req.params.date.toLowerCase();	
 	res.send(parseDate(date));
 });
 
