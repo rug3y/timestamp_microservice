@@ -2,6 +2,10 @@ var express    = require('express');
 var app        = express();
 
 var port = process.env.PORT || 8080;
+
+app.use(express.static('public'));
+app.use('/css', express.static('public'));
+
 var parseDate = function(date) {
 	var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 	var full_months = ['January','February','March','April','May','June',
@@ -42,6 +46,10 @@ var parseDate = function(date) {
 
 	return (response);
 };
+
+app.get('/', function(req, res) {
+	res.sendFile(__dirname + '/views/index.html');
+});
 
 // string passed at '/' is saved to date variable and returned.
 app.get('/:date', function(req, res) {
